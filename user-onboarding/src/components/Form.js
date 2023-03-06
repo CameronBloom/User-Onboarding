@@ -1,6 +1,6 @@
 export default function Form(props) {
   return (
-    <form>
+    <form onSubmit={props.handleSubmit}>
       <label>First Name&nbsp;
         <input 
           type="text"

@@ -25,6 +25,7 @@ function App() {
   const [form, setForm] = useState(defaultData);
   const [disabled, setDisabled] = useState(true);
   const [errors, setErrors] = useState(defaultData);
+  const [users, setUsers] = useState([]);
 
   // use schema to identify errors
   const setFormErrors = (name, value) => {
@@ -47,6 +48,19 @@ function App() {
     setForm({ ...form, [name]: valueToUse});
   }
 
+  // use onSubmit to submit a POST request with axios
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log("submit triggered");
+    axios
+      .post("https://reqres.in/api/users", form)
+      .then(res => {
+        console.log("success", res.data);
+        setUsers([ res.data, ...users])
+      })
+      .catch(err => console.error(err))
+  }
+
   // use schema to validate button status - effect runs every time the "form" is updated
   useEffect(() => {
     schema.isValid(form)
@@ -56,7 +70,19 @@ function App() {
 
   return (
     <div className="App">
-      <Form disabled={disabled} setDisabled={setDisabled} handleChange={handleChange} form={form} errors={errors} />
+      <Form 
+        disabled={disabled} 
+        setDisabled={setDisabled} 
+        handleChange={handleChange} 
+        form={form} 
+        errors={errors} 
+        handleSubmit={handleSubmit} 
+      />
+      {users.map(user => (
+        <div key={user.id}>
+          <p>{JSON.stringify(user)}</p>
+        </div>
+      ))}
     </div>
   );
 }
