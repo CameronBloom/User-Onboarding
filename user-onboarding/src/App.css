@@ -38,6 +38,14 @@
 }
 
 Form {
-  height: 10rem;
-  width: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: solid 1px black;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
 }
