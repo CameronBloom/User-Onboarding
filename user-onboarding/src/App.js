@@ -79,7 +79,7 @@ function App() {
         handleSubmit={handleSubmit} 
       />
       {users.map(user => (
-        <div key={user.id}>
+        <div class="user" key={user.id}>
           <p>{JSON.stringify(user)}</p>
         </div>
       ))}
